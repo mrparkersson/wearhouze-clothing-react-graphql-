@@ -1,22 +1,33 @@
-import { createContext, useState } from 'react';
-import { gql } from '@apollo/client';
+import { createContext, useState, useEffect } from 'react';
+import { gql, useQuery } from '@apollo/client';
 
 export const CategoriesContext = createContext({
   categoriesMap: {},
 });
 
-export const CategoriesProvider = ({ children }) => {
-  const [categoriesMap, setCategoriesMap] = useState({});
-
-  const COLLECTIONS = gql`
-    query {
-      collections {
-        id
+const COLLECTIONS = gql`
+  query {
+    collections {
+      id
+      title
+      items {
         name
-        title
+        imageUrl
+        price
+        id
       }
     }
-  `;
+  }
+`;
+
+export const CategoriesProvider = ({ children }) => {
+  const { loading, error, data } = useQuery(COLLECTIONS);
+  const [categoriesMap, setCategoriesMap] = useState({});
+
+  useEffect(() => {
+    const { collections } = data;
+    console.log(collections);
+  }, [data]);
 
   const value = { categoriesMap };
   return (
