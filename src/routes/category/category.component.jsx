@@ -31,6 +31,8 @@ const Category = () => {
     },
   });
 
+  //useEffect to run code
+
   useEffect(() => {
     if (data) {
       const {
