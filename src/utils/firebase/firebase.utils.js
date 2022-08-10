@@ -19,9 +19,10 @@ import {
   query,
   getDocs,
 } from 'firebase/firestore';
+import 'dotenv/config';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
+  apiKey: process.env.API_KEY,
   authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
   projectId: 'crwn-clothing-db-98d4d',
   storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
